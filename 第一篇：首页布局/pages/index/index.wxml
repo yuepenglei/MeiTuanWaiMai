@@ -1,0 +1,91 @@
+<scroll-view class="scroll-restaurants-list" scroll-y="true" scroll-top="0" style="height: 1400rpx;">
+
+<!--顶部地址栏，搜索栏开始-->
+  <view class="heard">
+    <navigator url="/pages/map/map">
+      <view class="heard-location">
+        <image src="/pages/images/location.png" 
+        class="heard-location-icon"/>
+        <text class="heard-location-text"></text>
+      </view>
+    </navigator>
+    <view class="heard-search">
+      <image src="/pages/images/search.png" class="heard-search-icon"/>
+      肯德基
+    </view>
+  </view>
+<!--顶部地址栏，搜索栏结束-->
+
+<!--滑块模块开始-->
+  <swiper class="swiper_list" indicator-dots="true" 
+  indicator-color="rgba(228,228,228,1)" 
+  indicator-active-color="#FECA49">
+    <block wx:for="{{swiperList}}" wx:for-item="itemList">
+      <swiper-item>
+        <block wx:for="{{itemList}}" wx:for-item="swiper">
+          <view class="swiper_info">
+            <image src="{{swiper.src}}" 
+            class="swiper_image"></image>
+            <view class="swiper_name">{{swiper.name}}</view>
+          </view>
+        </block>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!--滑块模块结束-->
+
+    <view id='title' class="title">-  附近商家  -</view>
+
+  <!--快捷搜索模块开始-->
+  <view class="sort_list">
+    <view class="sort">{{sortName}}
+    <image src="/pages/images/down.png"  style="width:20rpx;height:20rpx;"></image>
+    </view>
+    <view class="sort">
+      销量最高
+    </view>
+    <view class="sort">
+      距离最近
+    </view>
+    <view class="sort">筛选
+    </view>
+  </view>
+  <view class='search_hot'>
+    <block wx:for="{{filterList}}">
+      <view class="search_item_hot" wx:if="{{item.hot}}">{{item.name}}
+      </view>
+    </block>
+  </view>
+  <!--快捷搜索模块结束-->
+
+<!--商家列表开始-->
+  <view style="width:100%;height:100%;">
+    <view class="restaurantsList">
+    <block wx:for="{{restaurant}}" wx:key="">
+      <navigator url="/pages/menu/menu">
+        <view class="restaurants-list">
+          <view class="restaurants-info-image">
+            <image src="{{item.src}}" class="restaurants-image"/>
+          </view>
+          <view class="restaurants-info">
+            <view class="restaurants-info-name">{{item.name}}</view>
+            <view class="restaurants-info-rating">
+              <view
+              class="restaurants-info-rating-stars">{{item.scoreStr}}{{item.score}}</view>
+              <view 
+              class="restaurants-info-rating-sales">月售 {{item.num}}</view>
+            </view>
+            <view class="restaurants-info-price">
+              起送 {{item.allowMoney}}¥ | 配送 {{item.sendMoney}}¥| 人均 {{item.avgMoney}}¥
+            </view>
+        </view>
+        <view class="restaurants-distribution">
+          {{item.time}}分钟| {{item.distance}}
+        </view>
+       </view>
+      </navigator>
+    </block>
+    </view>
+  </view>
+  <!--商家列表结束-->
+</scroll-view>
